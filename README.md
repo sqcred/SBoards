@@ -1,9 +1,27 @@
 # SBoards
 The Minestom Scoreboard api is not very good if you want to make a scoreboard that is different for each player.
 <br> So i made this easy to use api
+<br>
 <br><br>
 This api is inspired by [JScoreboards](https://github.com/JordanOsterberg/JScoreboards)
-
+<br><br>
+To use this api, shade it into your project<br>
+By [downloading the jar](https://github.com/sqcred/SBoards/releases/latest)  or using maven
+<br>
+````
+    <repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
+	<dependency>
+	    <groupId>com.github.sqcred</groupId>
+	    <artifactId>SBoards</artifactId>
+	    <version>VERSION</version>
+	</dependency>
+````
 ## Usage
 ````
 // First we need to construct an SBoard
@@ -53,6 +71,9 @@ There are 2 exceptions:
 <br>SBoardNotFoundException -  Gets called when you are trying to update or remove a player from a scoreboard that doesnt exist
 <br>SBoardMaxLinesException - Gets called when you have more then 15 lines specified
 <br><br>
+
+###More Comming soon...
+
 ## Support
 If you find any bugs: Create an Issue <br>
 or if want to contact me <br>
