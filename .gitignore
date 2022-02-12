@@ -1,4 +1,7 @@
+SBoards.iml
 target/
+.idea/
+.idea/discord.xml
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
