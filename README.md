@@ -72,7 +72,7 @@ There are 2 exceptions:
 <br>SBoardMaxLinesException - Gets called when you have more then 15 lines specified
 <br><br>
 
-###More Comming soon...
+### More Comming soon...
 
 ## Support
 If you find any bugs: Create an Issue <br>
