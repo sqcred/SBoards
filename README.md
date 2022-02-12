@@ -54,7 +54,7 @@ board.addPlayer(player);
 // To update for 1 player
 board.update(player);
 
-// Todo update it for every player
+// Or to update it for every player
 board.updateAll();
 
 
