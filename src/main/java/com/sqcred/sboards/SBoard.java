@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /*
     MIT License
@@ -38,7 +39,7 @@ public class SBoard {
 
     private static final int MAX_LINES = 15;
 
-    private Map<Player, Sidebar> boards = new HashMap<>();
+    private final Map<Player, Sidebar> boards = new HashMap<>();
 
     private final Function<Player, Component> title;
     private final Function<Player, List<Component>> lines;
@@ -48,33 +49,34 @@ public class SBoard {
         this.lines = lines;
     }
 
-    public void addPlayer(Player player){
-        if(boards.containsKey(player)) return;
-        Sidebar sidebar = new Sidebar(title.apply(player));
-        List<Component> lineList = lines.apply(player);
-        int lineNameInt = 0;
-        int lineInt = lineList.size();
-        for (Component component : lineList) {
-            if(lineInt == 0 || lineList.size() > MAX_LINES) {
-                throw new SBoardMaxLinesException();
-            }
-            Sidebar.ScoreboardLine scoreboardLine = new Sidebar.ScoreboardLine("line" + lineNameInt, component, lineInt);
-            lineNameInt++;
-            lineInt--;
-            sidebar.createLine(scoreboardLine);
+    public boolean addPlayer(Player player){
+        if(boards.containsKey(player)) {
+            return false;
         }
+
+        Sidebar sidebar = new Sidebar(title.apply(player));
+        List<Component> lineList = lines.apply(player).stream().limit(MAX_LINES).toList();
+
+        for (int index = 0; index < lineList.size(); index++) {
+            Component component = lineList.get(index);
+            sidebar.createLine(new Sidebar.ScoreboardLine("line" + index, component, lineList.size() - index));
+        }
+
         sidebar.addViewer(player);
         boards.put(player, sidebar);
+        return true;
     }
 
-    public void removePlayer(Player player){
-        if(boards.containsKey(player)){
-            Sidebar sidebar = boards.get(player);
-            sidebar.removeViewer(player);
-            boards.remove(player);
-            return;
+    public boolean removePlayer(Player player){
+        Sidebar sidebar = boards.get(player);
+
+        if(sidebar == null) {
+            return false;
         }
-        throw new SBoardNotFoundException(player);
+
+        sidebar.removeViewer(player);
+        boards.remove(player);
+        return true;
     }
 
     public void removeAll(){
@@ -83,18 +85,22 @@ public class SBoard {
         }
     }
 
-    public void update(Player player){
-        if(boards.containsKey(player)){
-            Sidebar sidebar = boards.get(player);
-            sidebar.setTitle(title.apply(player));
-            List<Component> linesList = lines.apply(player);
-            for(Sidebar.ScoreboardLine line : sidebar.getLines()){
-                int number = Integer.parseInt(line.getId().split("line")[1]);
-                sidebar.updateLineContent(line.getId(), linesList.get(number));
-            }
-            return;
+    public boolean update(Player player){
+        Sidebar sidebar = boards.get(player);
+
+        if(sidebar == null){
+            return false;
         }
-        throw new SBoardNotFoundException(player);
+
+        sidebar.setTitle(title.apply(player));
+        List<Component> linesList = lines.apply(player);
+
+        for(Sidebar.ScoreboardLine line : sidebar.getLines()){
+            int number = Integer.parseInt(line.getId().split("line")[1]);
+            sidebar.updateLineContent(line.getId(), linesList.get(number));
+        }
+
+        return true;
     }
 
     public void updateAll(){
@@ -102,21 +108,4 @@ public class SBoard {
             update(player);
         }
     }
-
-    public static class SBoardNotFoundException extends RuntimeException {
-
-        public SBoardNotFoundException(Player player) {
-            super("SBoard for player: " + player.getUsername() + " not found!");
-        }
-
-    }
-
-    public static class SBoardMaxLinesException extends RuntimeException {
-
-        public SBoardMaxLinesException() {
-            super("15 lines is the max.");
-        }
-
-    }
-
 }
