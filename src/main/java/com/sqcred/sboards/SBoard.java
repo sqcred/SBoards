@@ -1,16 +1,3 @@
-package com.sqcred.sboards;
-
-import net.kyori.adventure.text.Component;
-
-import net.minestom.server.entity.Player;
-import net.minestom.server.scoreboard.Sidebar;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 /*
     MIT License
 
@@ -34,6 +21,19 @@ import java.util.stream.Collectors;
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
  */
+
+package com.sqcred.sboards;
+
+import net.kyori.adventure.text.Component;
+
+import net.minestom.server.entity.Player;
+import net.minestom.server.scoreboard.Sidebar;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class SBoard {
 
