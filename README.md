@@ -1,6 +1,6 @@
 # SBoards
 The Minestom Scoreboard api is not very good if you want to make a scoreboard that is different for each player.
-<br> So i made this easy to use api
+<br> So i made this easy to use api wich also contains a simple global scoreboard
 <br>
 <br><br>
 This api is inspired by [JScoreboards](https://github.com/JordanOsterberg/JScoreboards)
