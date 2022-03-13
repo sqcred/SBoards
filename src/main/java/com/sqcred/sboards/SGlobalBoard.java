@@ -76,6 +76,12 @@ public class SGlobalBoard {
         return true;
     }
 
+    public void removeAll(){
+        for(Player player : sidebar.getViewers()){
+            removePlayer(player);
+        }
+    }
+
     public boolean update(){
         if(title == null || lines == null){
             return false;
