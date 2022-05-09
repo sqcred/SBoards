@@ -34,14 +34,14 @@ import net.minestom.server.timer.TaskSchedule;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class SAnimation {
+public class SBoardAnimation {
 
     private List<Component> frames;
     private int current = 0;
 
     private Task task;
 
-    public SAnimation(Supplier<List<Component>> title, int intervalInMillis){
+    public SBoardAnimation(Supplier<List<Component>> title, int intervalInMillis){
         this.frames = title.get();
         task = MinecraftServer.getSchedulerManager().submitTask(() -> {
             current++;

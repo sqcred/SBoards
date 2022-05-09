@@ -48,7 +48,7 @@ public class SBoard {
         this.lines = lines;
     }
 
-    public SBoard(SAnimation title, Function<Player, List<Component>> lines) {
+    public SBoard(SBoardAnimation title, Function<Player, List<Component>> lines) {
         this.title = player -> title.getComponent();
         this.lines = lines;
     }

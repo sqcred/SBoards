@@ -56,6 +56,10 @@ public class SGlobalBoard {
 
     }
 
+    public SGlobalBoard(SBoardAnimation title, Supplier<List<Component>> lines){
+        this(title::getComponent, lines);
+    }
+
     public boolean addPlayer(Player player){
         if(sidebar == null) {
             return false;
