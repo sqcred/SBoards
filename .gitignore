@@ -1,4 +1,5 @@
 SBoards.iml
+src/main/java/com/sqcred/sboards/TestServer.java
 target/
 .idea/
 .idea/discord.xml
