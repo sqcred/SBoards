@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class SBoard {
 
@@ -41,11 +40,16 @@ public class SBoard {
 
     private final Map<Player, Sidebar> boards = new HashMap<>();
 
-    private final Function<Player, Component> title;
+    private Function<Player, Component> title;
     private final Function<Player, List<Component>> lines;
 
     public SBoard(Function<Player, Component> title, Function<Player, List<Component>> lines) {
         this.title = title;
+        this.lines = lines;
+    }
+
+    public SBoard(SAnimation title, Function<Player, List<Component>> lines) {
+        this.title = player -> title.getComponent();
         this.lines = lines;
     }
 
